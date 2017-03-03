@@ -5,16 +5,17 @@ class Panel extends Component {
     super(props);
 
     this.state = {
-      items: 0
+      items: []
     };
 
     this.add = this.add.bind(this);
   }
   add(){
-    console.log('click !');
     this.setState((oldState) =>{
+      var tmpState = oldState.items.slice();
+      tmpState.push('asd');
       return {
-        items: oldState.items + 1
+        items: tmpState
       }
     });
     return false;
@@ -24,7 +25,11 @@ class Panel extends Component {
     return (
       <div className="col-xs-4">
         <h3>{ this.props.name }</h3>
-        <p>{ items }</p>
+        <ul >
+          {items.map((item, key) => {
+            return <li key={key}>{ item }</li>;
+          })}
+        </ul>
         <a href="#" onClick={this.add}>Add card...</a>
       </div>
     );
