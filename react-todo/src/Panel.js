@@ -54,7 +54,7 @@ class Panel extends Component {
     else
       addItem = null;
     return (
-      <div className="col-xs-4">
+      <div className="col-xs-12 panel">
         <h3>{ name }</h3>
         <ul className="list-group">
           { 

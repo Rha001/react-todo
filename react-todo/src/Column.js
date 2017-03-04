@@ -5,9 +5,15 @@ class Column extends Component {
   render() {
     return (
       <div className="row">
-        <Panel name="Todo"/>
-        <Panel name="In progress"/>
-        <Panel name="Done"/>
+        <div className="col-xs-4">
+          <Panel name="Todo"/>
+        </div>
+        <div className="col-xs-4">
+          <Panel name="In progress"/>
+        </div>
+        <div className="col-xs-4">
+          <Panel name="Done"/>
+        </div>
       </div>
     );
   }
