@@ -11,6 +11,7 @@ class Panel extends Component {
 
     this.add = this.add.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
   add(){
     this.setState((oldState) =>{
@@ -19,17 +20,24 @@ class Panel extends Component {
         addItem: true
       }
     });
-
   }
-  addItem(item){
+  removeItem(key){
+    this.setState((oldState) =>{
+      let tmpState = oldState.items.slice();
+      tmpState.splice(key, 1);
 
+      return {
+        items: tmpState,
+        addItem: oldState.addItem
+      }
+    });
   }
   handleKeyPress(event){
     if(event.key == 'Enter'){
       const newValue = event.target.value;
 
       this.setState((oldState) =>{
-        var tmpState = oldState.items.slice();
+        let tmpState = oldState.items.slice();
         tmpState.push(newValue);
 
         return {
@@ -61,13 +69,15 @@ class Panel extends Component {
             items.map((item, key) => {
             return <li className="list-group-item justify-content-between" key={key}>
                       { item } 
-                      <a href="#" className="pullright">x</a>
+                      <a href="#" className="pullright" onClick={this.removeItem.bind(this, key)}>x</a>
                   </li>;
             }) 
           }
         </ul>
         { addItem }
-        <a href="#" onClick={this.add}>Add card...</a>
+        <h5>
+          <a href="#" onClick={this.add}>Add card...</a>
+        </h5>
       </div>
     );
   }
