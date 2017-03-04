@@ -10,11 +10,10 @@ class Panel extends Component {
     };
 
     this.add = this.add.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   add(){
     this.setState((oldState) =>{
-      /*var tmpState = oldState.items.slice();
-      tmpState.push('asd');*/
       return {
         items: oldState.items,
         addItem: true
@@ -22,13 +21,36 @@ class Panel extends Component {
     });
 
   }
+  addItem(item){
+
+  }
+  handleKeyPress(event){
+    if(event.key == 'Enter'){
+      const newValue = event.target.value;
+
+      this.setState((oldState) =>{
+        var tmpState = oldState.items.slice();
+        tmpState.push(newValue);
+
+        return {
+          items: tmpState,
+          addItem: false
+        }
+      });
+    }
+  }
+  componentDidUpdate(prevProps, prevState){
+    const input = document.getElementById('newItem');
+    if(input)
+      input.focus();
+  }
   render() {
     const name = this.props.name;
     const items = this.state.items;
     const add = this.state.addItem;
     let addItem;
     if(add)
-      addItem = <textarea></textarea>;
+      addItem = <input className="form-control" id="newItem" placeholder="add task" onKeyPress={this.handleKeyPress}/>;
     else
       addItem = null;
     return (
