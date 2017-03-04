@@ -69,7 +69,7 @@ class Panel extends Component {
             items.map((item, key) => {
             return <li className="list-group-item justify-content-between" key={key}>
                       { item } 
-                      <a href="#" className="pullright" onClick={this.removeItem.bind(this, key)}>x</a>
+                      <span className="badge badge-default badge-pill pointer" onClick={this.removeItem.bind(this, key)} role="button">x</span>
                   </li>;
             }) 
           }
